@@ -1,12 +1,25 @@
+#[derive(Debug)]
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+
 fn main() {
-    // それぞれの要素に対して、異なる型の定義が可能
-    let tup: (i32, f64 ,u8) = (500, 6.4, 1);
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+    println!("User1 is {:?}", user1);
 
-    let (x, y, z) = tup;
-    println!("The value of y is: {}", y);
+    let user2 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername567"),
+        ..user1 // このように指定した場合は、定義済みのuser1と同じ値を利用する
+    };
 
-    let x: i32 = tup.0;
-    let y: f64 = tup.1;
-    let z: u8 = tup.2;
-    println!("x is {}, y is {}, and z is {}", x,y,z);
+    println!("User2 is {:?}", user2);
 }
