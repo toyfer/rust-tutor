@@ -1,25 +1,23 @@
-#[derive(Debug)]
-struct User {
-    username: String,
-    email: String,
-    active: bool,
-    sign_in_count: u64,
+fn main() {
+    let s1 = String::from("hello");
+    // この場合、mutを付けていないので、不変参照を指す
+    
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+
+    let mut s2 = String::from("hello");
+    // この場合、mutを付けているので、可変参照を指す
+    
+    change(&mut s2); // s2の可変参照を渡す
+
+    println!("s2 is now: {}", s2);
 }
 
-fn main() {
-    let user1 = User {
-        email: String::from("someone@example.com"),
-        username: String::from("someusername123"),
-        active: true,
-        sign_in_count: 1,
-    };
-    println!("User1 is {:?}", user1);
+fn calculate_length(s: &String) -> usize { // 不変参照を受け取る関数
+    s.len()
+}
 
-    let user2 = User {
-        email: String::from("someone@example.com"),
-        username: String::from("someusername567"),
-        ..user1 // このように指定した場合は、定義済みのuser1と同じ値を利用する
-    };
-
-    println!("User2 is {:?}", user2);
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
 }
